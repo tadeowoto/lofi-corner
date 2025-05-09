@@ -11,6 +11,33 @@ import "./src/styles/global.css";
     <title>Lofi Corner ☕️</title>
   </head>
   <body>
+    <div id="app" class="relative h-screen p-2 gap-2">
+      <aside
+        class="[grid-area:aside] flex flex-col overflow-y-auto bg-amber-200"
+      >
+        ASIDE
+      </aside>
+      <main
+        class="[grid-area:main] flex flex-col overflow-y-auto h-full bg-amber-600"
+      >
+      </main>
+      <footer class="[grid-area:player] bg-red-50">PLAYER</footer>
+    </div>
     <slot />
   </body>
 </html>
+
+<style>
+  html {
+    background-color: #000;
+  }
+
+  #app {
+    display: grid;
+    grid-template-areas:
+      "aside main main"
+      "player player player";
+    grid-template-columns: 350px 1fr;
+    grid-template-rows: 1fr auto;
+  }
+</style>
