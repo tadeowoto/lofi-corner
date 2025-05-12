@@ -1,6 +1,7 @@
 ---
 import "./src/styles/global.css";
 import Aside from "../components/Aside.astro";
+import { ClientRouter } from "astro:transitions";
 ---
 
 <!doctype html>
@@ -9,6 +10,7 @@ import Aside from "../components/Aside.astro";
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
+    <ClientRouter fallback="none" />
     <title>Lofi Corner ☕️</title>
   </head>
   <body>

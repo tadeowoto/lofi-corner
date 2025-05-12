@@ -2,18 +2,19 @@
 import Layout from "../layouts/Layout.astro";
 import MainPlaylistItem from "../components/MainPlaylistItem.astro";
 import { playlists } from "../lib/data";
+import { Greeting } from "../components/Greeting";
 ---
 
 <Layout>
   <div
     id="playlist-container"
-    class="relative transition-all duration-1000 bg-green-600 h-full"
+    class="relative transition-all duration-1000 bg-zinc-900 h-full overflow-x-hidden"
   >
     <!-- Page header here -->
 
     <div class="relative z-10 px-6 pt-10">
       <!-- Greetings -->
-      <h1 class="text-3xl font-bold">Buenos Dias 👋</h1>
+      <Greeting client:visible />
 
       <div class="grid grid-cols-3 grid-rows-2 gap-2 mt-10">
         {playlists.map((playlist) => <MainPlaylistItem playlist={playlist} />)}

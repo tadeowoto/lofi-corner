@@ -5,6 +5,12 @@ import { allPlaylists, songs } from "../../lib/data";
 const { id } = Astro.params;
 const playlist = allPlaylists.find((playlist) => playlist.id === id);
 
+if (!playlist) {
+  return Astro.redirect("/404");
+}
+
+const artistString = playlist.artists.join(", ");
+
 const playlistSongs = songs.filter(
   (song) => song.albumId === playlist?.albumId
 );
@@ -13,20 +19,30 @@ const playlistSongs = songs.filter(
 <Layout>
   <div
     id="playlist-container"
-    class="relative transition-all duration-1000 bg-green-600 h-full"
+    class="relative transition-all duration-1000 bg-zinc-900 h-full overflow-x-hidden"
   >
-    <!-- Page header here -->
-
-    <div class="relative z-10 px-6 pt-10">
-      <!-- Greetings -->
-      <h1 class="text-3xl font-bold">Buenos Dias 👋</h1>
-
-      <div class="grid grid-cols-3 grid-rows-2 gap-2 mt-10">
-        {playlists.map((playlist) => <MainPlaylistItem playlist={playlist} />)}
+    <header class="flex items-center gap-8 h-70 p-8">
+      <picture class="w-62 h-62 aspect-square flex-none">
+        <img
+          src={playlist.cover}
+          alt={`${playlist.title}`}
+          class="w-full h-full object-cover"
+          transition:name={`playlist-${id}-image`}
+        />
+      </picture>
+      <div class="flex flex-col">
+        <p class="text-zinc-400">Playlist</p>
+        <h1 class="font-bold text-7xl" transition:name={`playlist-${id}-title`}>
+          {playlist.title}
+        </h1>
+        <p class="text-zinc-400">
+          Lofi by: <span class="font-bold text-zinc-300">{artistString}</span>
+        </p>
       </div>
-    </div>
+    </header>
+
     <div
-      class="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/80"
+      class="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/80 -z-10"
     >
     </div>
   </div>
