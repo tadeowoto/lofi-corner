@@ -17,6 +17,7 @@ import Aside from "../components/Aside.astro";
       <main class="[grid-area:main] flex flex-col overflow-y-auto h-full">
         <slot />
       </main>
+      <div class="[grid-area:secondaryPlayer]">Secondary player</div>
       <footer class="[grid-area:player] bg-red-50">PLAYER</footer>
     </div>
   </body>
@@ -32,8 +33,8 @@ import Aside from "../components/Aside.astro";
   #app {
     display: grid;
     grid-template-areas:
-      "aside main main"
-      "player player player";
+      "aside main main secondaryPlayer"
+      "player player player player";
     grid-template-columns: 350px 1fr;
     grid-template-rows: 1fr auto;
   }

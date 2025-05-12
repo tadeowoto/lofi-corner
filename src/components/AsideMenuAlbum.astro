@@ -8,8 +8,6 @@ interface Props {
 const { playlist } = Astro.props;
 const { id, title, cover, artists, color } = playlist;
 const artistString = artists.join(", ");
-
-console.log(playlist);
 ---
 
 <a
@@ -19,8 +17,8 @@ console.log(playlist);
   <picture class="w-14 h-14">
     <img src={cover} alt={`${title} cover`} class="w-full object-cover" />
   </picture>
-  <div class="flex flex-col">
-    <h3 class="font-bold">{title}</h3>
+  <div class="flex flex-col truncate">
+    <h3 class="font-semibold">{title}</h3>
     <p class="text-zinc-400">{artistString}</p>
   </div>
 </a>
