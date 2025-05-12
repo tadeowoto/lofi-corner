@@ -2,6 +2,7 @@
 import "./src/styles/global.css";
 import Aside from "../components/Aside.astro";
 import { ClientRouter } from "astro:transitions";
+import Player from "../components/Player";
 ---
 
 <!doctype html>
@@ -20,7 +21,9 @@ import { ClientRouter } from "astro:transitions";
         <slot />
       </main>
       <div class="[grid-area:secondaryPlayer]">Secondary player</div>
-      <footer class="[grid-area:player] bg-red-50">PLAYER</footer>
+      <footer class="[grid-area:player]">
+        <Player client:load transition:name="media-player" transition:persist />
+      </footer>
     </div>
   </body>
 </html>

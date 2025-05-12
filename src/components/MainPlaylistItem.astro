@@ -1,5 +1,6 @@
 ---
 import type { Playlist } from "../lib/data";
+import { CardPlayButton } from "../components/CardPlayButton";
 
 interface Props {
   playlist: Playlist;
@@ -9,21 +10,28 @@ const { playlist } = Astro.props;
 const { id, title, cover, color } = playlist;
 ---
 
-<a
-  href={`/playlist/${id}`}
-  class="playlist-item max-w-70 flex gap-2 rounded-lg p-1 hover:bg-zinc-500/100 hover:transform hover:scale-105 hover:transition-all"
->
-  <picture class="w-12 h-12 flex-none">
-    <img
-      src={cover}
-      alt={`${title} cover`}
-      class="w-full h-full object-cover"
-      transition:name={`playlist-${id}-image`}
-    />
-  </picture>
-  <div class="flex items-center justify-center truncate">
-    <h3 class="font-semibold" transition:name={`playlist-${id}-title`}>
-      {title}
-    </h3>
-  </div>
-</a>
+<article class="group relative">
+  <a
+    href={`/playlist/${id}`}
+    class="playlist-item max-w-70 flex gap-2 rounded-lg p-1 hover:bg-zinc-500/100 hover:transform hover:scale-105 hover:transition-all relative group hover:cursor-pointer"
+  >
+    <picture class="w-12 h-12 flex-none">
+      <img
+        src={cover}
+        alt={`${title} cover`}
+        class="w-full h-full object-cover"
+        transition:name={`playlist-${id}-image`}
+      />
+    </picture>
+    <div class="flex items-center justify-center truncate">
+      <h3 class="font-semibold" transition:name={`playlist-${id}-title`}>
+        {title}
+      </h3>
+    </div>
+    <button
+      class="absolute bottom-2 right-2 bg-green-500 translate-y-4 group-hover:translate-0 rounded-full p-2 opacity-0 group-hover:opacity-100 transition-all hover:scale-110 hover:cursor-pointer"
+    >
+      <CardPlayButton id={id} />
+    </button>
+  </a>
+</article>
