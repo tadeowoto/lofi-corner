@@ -14,13 +14,11 @@ import Aside from "../components/Aside.astro";
   <body>
     <div id="app" class="relative h-screen p-2 gap-2">
       <Aside class="[grid-area:aside]" />
-      <main
-        class="[grid-area:main] flex flex-col overflow-y-auto h-full bg-amber-600"
-      >
+      <main class="[grid-area:main] flex flex-col overflow-y-auto h-full">
+        <slot />
       </main>
       <footer class="[grid-area:player] bg-red-50">PLAYER</footer>
     </div>
-    <slot />
   </body>
 </html>
 
@@ -28,6 +26,7 @@ import Aside from "../components/Aside.astro";
   html {
     font-family: "CircularStd", system-ui, sans-serif;
     background-color: #000;
+    color: #fff;
   }
 
   #app {
