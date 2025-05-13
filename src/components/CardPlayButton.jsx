@@ -27,7 +27,6 @@ export const CardPlayButton = ({ id }) => {
           song: songs[0],
           songs,
         });
-        console.log({ playlist, songs });
       });
   };
 
