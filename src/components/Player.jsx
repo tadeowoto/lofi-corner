@@ -4,14 +4,11 @@ import Play from "../icons/Play";
 import { usePlayerStore } from "../store/playerStore";
 
 const Player = () => {
-  const { isPlaying, setIsPlaying } = usePlayerStore((state) => state);
+  const { isPlaying, setIsPlaying, currentMusic } = usePlayerStore(
+    (state) => state
+  );
   const [currentSong, setCurrentSong] = useState(null);
   const audioRef = useRef();
-
-  useEffect(() => {
-    audioRef.current.src = "music/1/01.mp3";
-  }, []);
-
   const handleClick = () => {
     if (isPlaying) {
       audioRef.current.pause();
@@ -26,7 +23,7 @@ const Player = () => {
     <div className="fixed bottom-0 left-0 right-0">
       <div className="backdrop-blur-md bg-white/10 border-t border-white/20">
         <div className="h-16  flex justify-between w-full px-4 z-50">
-          <div>current song</div>
+          <div>{currentMusic.song?.title}</div>
           <div className="grid place-items-center gap-4 flex-1">
             <div className="flex justify-center">
               <button
