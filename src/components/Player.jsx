@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import Pause from "../icons/Pause";
 import Play from "../icons/Play";
+import { usePlayerStore } from "../store/playerStore";
 
 const Player = () => {
-  const [isPlaying, setIsPlaying] = useState(false);
+  const { isPlaying, setIsPlaying } = usePlayerStore((state) => state);
   const [currentSong, setCurrentSong] = useState(null);
   const audioRef = useRef();
 
