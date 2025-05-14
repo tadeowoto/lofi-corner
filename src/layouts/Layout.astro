@@ -3,6 +3,7 @@ import "./src/styles/global.css";
 import Aside from "../components/Aside.astro";
 import { ClientRouter } from "astro:transitions";
 import Player from "../components/Player";
+import SecondaryPlayer from "../components/SecondaryPlayer.astro";
 ---
 
 <!doctype html>
@@ -20,7 +21,7 @@ import Player from "../components/Player";
       <main class="[grid-area:main] flex flex-col overflow-y-auto h-full">
         <slot />
       </main>
-      <div class="[grid-area:secondaryPlayer]">Secondary player</div>
+      <!-- <SecondaryPlayer class="[grid-area:secondaryPlayer]" /> TODO  -->
       <footer class="[grid-area:player]">
         <Player client:load transition:name="media-player" transition:persist />
       </footer>

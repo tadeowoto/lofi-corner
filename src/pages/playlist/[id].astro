@@ -1,6 +1,8 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { allPlaylists, songs } from "../../lib/data";
+import MusicTable from "../../components/MusicTable.astro";
+import { CardPlayButton } from "../../components/CardPlayButton";
 
 const { id } = Astro.params;
 const playlist = allPlaylists.find((playlist) => playlist.id === id);
@@ -40,10 +42,14 @@ const playlistSongs = songs.filter(
         </p>
       </div>
     </header>
-
+    <div class="flex justify-start pl-5">
+      <CardPlayButton id={id} size="lg" client:load />
+    </div>
     <div
       class="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/80 -z-10"
     >
     </div>
+
+    <MusicTable songs={playlistSongs} />
   </div>
 </Layout>
