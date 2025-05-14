@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import Pause from "../icons/Pause";
 import Play from "../icons/Play";
 import { usePlayerStore } from "../store/playerStore";
+import { Slider } from "./Slider";
 
 const Player = () => {
   const { isPlaying, setIsPlaying, currentMusic } = usePlayerStore(
@@ -38,23 +39,25 @@ const Player = () => {
     <div className="fixed bottom-0 left-0 right-0">
       <div className="backdrop-blur-md bg-white/10 border-t border-white/20">
         <div className="h-16  flex justify-between w-full px-4 z-50">
-          <div className="flex items-center gap-5 p-2">
-            <picture className="w-12 h-12">
-              <img
-                src={currentMusic.song?.image}
-                alt={`imagen del album de ${currentMusic.song?.album}`}
-                className="w-full h-full object-cover"
-              />
-            </picture>
-            <div className="flex flex-col">
-              <h2 className="text-xl font-semibold">
-                {currentMusic.song?.title}
-              </h2>
-              <p className="text-sm text-zinc-400">
-                {currentMusic.song?.album}
-              </p>
+          {currentMusic.song ? (
+            <div className="flex items-center gap-5 p-2 max-w-90">
+              <picture className="w-12 h-12">
+                <img
+                  src={currentMusic.song?.image}
+                  alt={`imagen del album de ${currentMusic.song?.album}`}
+                  className="w-full h-full object-cover"
+                />
+              </picture>
+              <div className="flex flex-col">
+                <h2 className="text-xl font-semibold">
+                  {currentMusic.song?.title}
+                </h2>
+                <p className="text-sm text-zinc-400">
+                  {currentMusic.song?.album}
+                </p>
+              </div>
             </div>
-          </div>
+          ) : null}
           <div className="grid place-items-center gap-4 flex-1">
             <div className="flex justify-center">
               <button
@@ -65,7 +68,18 @@ const Player = () => {
               </button>
             </div>
           </div>
-          <div className="grid place-content-center">volume</div>
+          <div className="w-[200px] flex justify-center">
+            <Slider
+              defaultValue={[100]}
+              max={100}
+              min={0}
+              className="w-full"
+              onValueChange={(value) => {
+                const newVolume = value / 100;
+                audioRef.current.volume = newVolume;
+              }}
+            />
+          </div>
           <audio ref={audioRef}></audio>
         </div>
       </div>
