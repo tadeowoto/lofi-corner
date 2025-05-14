@@ -2,6 +2,9 @@
 
 Una aplicación web inspirada en la interfaz de Spotify Desktop, pero enfocada exclusivamente en música lofi. Creada con Astro y React, esta aplicación ofrece una experiencia de navegación y reproducción de música lofi moderna y familiar.
 
+
+<img width="1432" alt="Captura de pantalla 2025-05-14 a la(s) 12 06 29 p  m" src="https://github.com/user-attachments/assets/b928eb77-94f2-44ff-b994-7c2a5f48a79a" />
+
 ## Características
 
 - 🎵 Explorar y reproducir playlists de música lofi
