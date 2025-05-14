@@ -1,11 +1,12 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import Pause from "../icons/Pause";
 import Play from "../icons/Play";
 import { usePlayerStore } from "../store/playerStore";
-import { Slider } from "./Slider";
+import { PlayerVolumeControl } from "./PlayerVolumeControl";
+import { PlayerSongControl } from "./PlayerSongControl";
 
 const Player = () => {
-  const { isPlaying, setIsPlaying, currentMusic } = usePlayerStore(
+  const { isPlaying, setIsPlaying, currentMusic, volume } = usePlayerStore(
     (state) => state
   );
   const audioRef = useRef();
@@ -19,10 +20,15 @@ const Player = () => {
   }, [isPlaying]);
 
   useEffect(() => {
+    audioRef.current.volume = volume;
+  }, [volume]);
+
+  useEffect(() => {
     const { song, playlist } = currentMusic;
     if (song) {
       const src = `music/${playlist.id}/0${song.id}.mp3`;
       audioRef.current.src = src;
+      audioRef.current.volume = volume;
       audioRef.current.play();
     }
   }, [currentMusic]);
@@ -38,7 +44,7 @@ const Player = () => {
   return (
     <div className="fixed bottom-0 left-0 right-0">
       <div className="backdrop-blur-md bg-white/10 border-t border-white/20">
-        <div className="h-16  flex justify-between w-full px-4 z-50">
+        <div className="h-22 p-1  flex justify-between w-full px-4 z-50">
           {currentMusic.song ? (
             <div className="flex items-center gap-5 p-2 max-w-90">
               <picture className="w-12 h-12">
@@ -59,26 +65,18 @@ const Player = () => {
             </div>
           ) : null}
           <div className="grid place-items-center gap-4 flex-1">
-            <div className="flex justify-center">
+            <div className="w-[600px] flex justify-center flex-col items-center ">
               <button
                 className="bg-white rounded-full p-2"
                 onClick={handleClick}
               >
                 {isPlaying ? <Pause /> : <Play />}
               </button>
+              <PlayerSongControl audio={audioRef} client:visible />
             </div>
           </div>
           <div className="w-[200px] flex justify-center">
-            <Slider
-              defaultValue={[100]}
-              max={100}
-              min={0}
-              className="w-full"
-              onValueChange={(value) => {
-                const newVolume = value / 100;
-                audioRef.current.volume = newVolume;
-              }}
-            />
+            <PlayerVolumeControl client:visible />
           </div>
           <audio ref={audioRef}></audio>
         </div>
